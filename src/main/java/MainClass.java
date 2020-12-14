@@ -13,12 +13,18 @@ public class MainClass {
         driver.get("http://automationpractice.com/");
 
         MainPage mainPage = new MainPage(driver);
-
         mainPage.clickSignIn();
 
-        SignInPage signInPage = new SignInPage(driver);
 
-        signInPage.invalidCredentials("gooduser@alex.com", "emerep01");
+        SignInPage signInPage = new SignInPage(driver);
+        signInPage.login("gooduser@alex.com", "emerep01");
+
+        WishListPage wishListPage = new WishListPage(driver);
+        wishListPage.getTitle();
+
+//        SignUpPage signUpPage = new SignUpPage(driver);
+//        signInPage.createAccount("test234emeil@dmail.da");
+//        signUpPage.fillingInTheFields("Alex", "kurt", "alex@test.ru", "emerep01");
 
 
         try{

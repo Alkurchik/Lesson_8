@@ -10,14 +10,15 @@ public class SignInPage {
 
     // CREATE AN ACCOUNT
     private By emailInput = By.id("email_create");
-    private By formIsOk = By.xpath("//div[@class=\"form-group form-ok\"]");
+    private By formIsOk = By.xpath("//div[contains(@class,'form-ok')]");
     private By formError = By.xpath("//div[@class=\"form-group form-error\"]");
+    private By submitButton = By.id("SubmitCreate");
 
     // ALREADY REGISTERED?
     private By emailLoginInput = By.id("email");
     private By passwordLoginInput = By.id("passwd");
     private By signInButton = By.id("SubmitLogin");
-    private By loginFormIsOk = By.xpath("//form[@id=\"login_form\"]//div[@class=\"form-group form-ok\"]");
+    private By loginFormIsOk = By.xpath("//form[@id=\"create-account_form\"]//div[contains(@class,'form-ok')]");
     private By faildMessage = By.xpath("//div[@class=\"alert alert-danger\"]/ol/li");
 
     public SignInPage typeEmail(String email){
@@ -30,7 +31,13 @@ public class SignInPage {
         return this;
     }
 
-    public SignInPage invalidCredentials(String email, String password){
+    public SignUpPage createAccount(String email) {
+        driver.findElement(emailInput).sendKeys(email);
+        driver.findElement(submitButton).click();
+        return new SignUpPage(driver);
+    }
+
+    public SignInPage login(String email, String password){
         this.typeEmail(email);
         this.typePassword(password);
         driver.findElement(signInButton).click();

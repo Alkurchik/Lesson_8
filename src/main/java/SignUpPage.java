@@ -30,7 +30,7 @@ public class SignUpPage {
     private By AddrPhoneMobile = By.id("phone_mobile");
     private By AddrAlias = By.id("alias");
 
-    public void typeField(By elem, String text) {
+    private void typeField(By elem, String text) {
         driver.findElement(elem).sendKeys(text);
     }
 
