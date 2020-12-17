@@ -17,22 +17,30 @@ public class MainClass {
 
 
         SignInPage signInPage = new SignInPage(driver);
-        signInPage.login("gooduser@alex.com", "emerep01");
+//        signInPage.login("gooduser@alex.com", "emerep01");
+//
+//        WishListPage wishListPage = new WishListPage(driver);
+//        wishListPage.getTitle();
 
-        WishListPage wishListPage = new WishListPage(driver);
-        wishListPage.getTitle();
-
-//        SignUpPage signUpPage = new SignUpPage(driver);
-//        signInPage.createAccount("test234emeil@dmail.da");
-//        signUpPage.fillingInTheFields("Alex", "kurt", "alex@test.ru", "emerep01");
-
-
-        try{
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signInPage.createAccount("test234emeil@dmail.da123");
+        signUpPage.fillingInTheFields(
+                "Alex",
+                "kurt",
+                "alex@test.ru2",
+                "emerep01",
+                "1",
+                "1",
+                "1997",
+                "elegia",
+                "zhukovskogo",
+                "Minsk",
+                "1",
+                "00000",
+                "21",
+                "Test",
+                "+375291338075",
+                "test@test.com");
         driver.quit();
     }
 }

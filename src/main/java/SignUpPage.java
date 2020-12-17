@@ -1,5 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class SignUpPage {
     WebDriver driver;
@@ -30,22 +34,70 @@ public class SignUpPage {
     private By AddrPhoneMobile = By.id("phone_mobile");
     private By AddrAlias = By.id("alias");
 
+    List<WebElement> options;
+    Select sel;
+
+
     private void typeField(By elem, String text) {
         driver.findElement(elem).sendKeys(text);
+    }
+
+    private void selectOptions(By select, String option){
+        WebElement selecBox = driver.findElement(select);
+        sel = new Select(selecBox);
+        sel.selectByValue(option);
     }
 
     public ProfilePage fillingInTheFields(
             String firstName,
             String lastName,
             String email,
-            String password)
+            String password,
+            String day,
+            String month,
+            String year,
+            String company,
+            String address,
+            String city,
+            String state,
+            String zipCode,
+            String country,
+            String other,
+            String phone,
+            String emailAlias)
     {
-        this.typeField(customerFirstname, firstName);
-        this.typeField(customerLastname, lastName);
-        this.typeField(customerEmail, email);
-        this.typeField(customerPasswd, password);
+            driver.findElement(titleForm).click();
+
+            this.typeField(customerFirstname, firstName);
+            this.typeField(customerLastname, lastName);
+            this.typeField(customerEmail, email);
+            this.typeField(customerPasswd, password);
+
+            this.selectOptions(customerDaysSelector, day);
+            this.selectOptions(customerMonthsSelector, month);
+            this.selectOptions(customerYearsSelector, year);
+
+            try{
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            this.typeField(AddrFirstname, firstName);
+            this.typeField(AddrLastname, lastName);
+            this.typeField(AddrCompany, company);
+            this.typeField(AddrAddress1, address);
+            this.typeField(AddrCity, city);
+
+            this.selectOptions(AddrState, state);
+            this.selectOptions(AddrCountry,country);
+
+            this.typeField(AddrZipCode, zipCode);
+            this.typeField(AddrOtherInformation, other);
+            this.typeField(AddrPhone, phone);
+            this.typeField(AddrPhoneMobile, phone);
+            this.typeField(AddrAlias, emailAlias);
 
         return new ProfilePage(driver);
     }
-
 }
