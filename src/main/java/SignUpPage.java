@@ -33,10 +33,12 @@ public class SignUpPage {
     private By AddrPhone = By.id("phone");
     private By AddrPhoneMobile = By.id("phone_mobile");
     private By AddrAlias = By.id("alias");
+    private By errorList = By.xpath("//div[@class=\"alert alert-danger\"]/ol/li/b");
 
-    List<WebElement> options;
+    private By submitButton = By.id("submitAccount");
+
+
     Select sel;
-
 
     private void typeField(By elem, String text) {
         driver.findElement(elem).sendKeys(text);
@@ -46,6 +48,14 @@ public class SignUpPage {
         WebElement selecBox = driver.findElement(select);
         sel = new Select(selecBox);
         sel.selectByValue(option);
+    }
+
+    private void getError(){
+        List<WebElement> row = driver.findElements(errorList);
+        for (int x=0; x<row.size(); x++){
+            String value = row.get(x).getText();
+            System.out.println(value);
+        }
     }
 
     public ProfilePage fillingInTheFields(
@@ -67,24 +77,23 @@ public class SignUpPage {
             String emailAlias)
     {
             driver.findElement(titleForm).click();
-
             this.typeField(customerFirstname, firstName);
             this.typeField(customerLastname, lastName);
-            this.typeField(customerEmail, email);
-            this.typeField(customerPasswd, password);
 
+            driver.findElement(customerEmail).clear();
+            this.typeField(customerEmail, email);
+
+            this.typeField(customerPasswd, password);
             this.selectOptions(customerDaysSelector, day);
             this.selectOptions(customerMonthsSelector, month);
             this.selectOptions(customerYearsSelector, year);
 
-            try{
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+            driver.findElement(AddrFirstname).clear();
             this.typeField(AddrFirstname, firstName);
+
+            driver.findElement(AddrLastname).clear();
             this.typeField(AddrLastname, lastName);
+
             this.typeField(AddrCompany, company);
             this.typeField(AddrAddress1, address);
             this.typeField(AddrCity, city);
@@ -97,6 +106,9 @@ public class SignUpPage {
             this.typeField(AddrPhone, phone);
             this.typeField(AddrPhoneMobile, phone);
             this.typeField(AddrAlias, emailAlias);
+
+            driver.findElement(submitButton).click();
+            this.getError();
 
         return new ProfilePage(driver);
     }

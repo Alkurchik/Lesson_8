@@ -17,6 +17,7 @@ public class MainClass {
 
 
         SignInPage signInPage = new SignInPage(driver);
+        ProfilePage profilePage = new ProfilePage(driver);
 //        signInPage.login("gooduser@alex.com", "emerep01");
 //
 //        WishListPage wishListPage = new WishListPage(driver);
@@ -27,7 +28,7 @@ public class MainClass {
         signUpPage.fillingInTheFields(
                 "Alex",
                 "kurt",
-                "alex@test.ru2",
+                "testcom@testcom.testcom",
                 "emerep01",
                 "1",
                 "1",
@@ -41,6 +42,7 @@ public class MainClass {
                 "Test",
                 "+375291338075",
                 "test@test.com");
+        profilePage.verifyProfile();
         driver.quit();
     }
 }

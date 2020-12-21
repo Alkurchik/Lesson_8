@@ -21,12 +21,12 @@ public class SignInPage {
     private By loginFormIsOk = By.xpath("//form[@id=\"create-account_form\"]//div[contains(@class,'form-ok')]");
     private By faildMessage = By.xpath("//div[@class=\"alert alert-danger\"]/ol/li");
 
-    public SignInPage typeEmail(String email){
+    private SignInPage typeEmail(String email){
         driver.findElement(emailLoginInput).sendKeys(email);
         return this;
     }
 
-    public SignInPage typePassword(String password){
+    private SignInPage typePassword(String password){
         driver.findElement(passwordLoginInput).sendKeys(password);
         return this;
     }
