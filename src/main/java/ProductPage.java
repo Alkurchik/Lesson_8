@@ -19,6 +19,9 @@ public class ProductPage {
     private By productCategories = By.xpath("//a[@title=\"Women\"]");
     private By addToWishListButton = By.xpath("//*[@id=\"wishlist_button\"]");
     private By addToCart = By.xpath("//*[@id=\"add_to_cart\"]/button");
+    private By prouductAdded = By.xpath("//div[@id=\"layer_cart\"]//h2/i[@class=\"icon-ok\"]");
+    private By continueShoppingBtn = By.xpath("//span[@class=\"continue btn btn-default button exclusive-medium\"]/span[text()]");
+
 
 
     public String getTitleText(){
@@ -55,13 +58,22 @@ public class ProductPage {
         for (int i=1; i<row.size(); i++){
             driver.findElement(By.xpath(String.format(
                     "//*[@id=\"center_column\"]/ul/li[%s]//h5[@itemprop=\"name\"]/a[@class=\"product-name\"]", i))).click();
-
             driver.findElement(action).click();
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (driver.findElement(prouductAdded).isDisplayed()){
+                driver.findElement(continueShoppingBtn).click();
+            }
 
             this.addToJson(Integer.toString(i), this.getTitleText());
             driver.navigate().back();
         }
-        this.goToWishList();
+//        this.goToWishList();
     }
 
     public void addToCart(){

@@ -51,7 +51,8 @@ public class WishListPage {
         }
     }
 
-    public void readWishList() throws IOException, ParseException {
+    public void readWishList() throws IOException, ParseException {//можно вынести функцию
+        driver.get("http://automationpractice.com/index.php?fc=module&module=blockwishlist&controller=mywishlist");
         driver.findElement(MyWishlist).click();
         profilePage = new ProfilePage(driver);
 

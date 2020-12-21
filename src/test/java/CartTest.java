@@ -1,17 +1,18 @@
+import org.json.simple.parser.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class CartTest {
     private WebDriver driver;
     SignInPage signInPage;
-    ProfilePage profilePage;
-    WishListPage wishListPage;
     ProductPage productPage;
+    CartPage cartPage;
 
     @Before
     public void setUp(){
@@ -21,15 +22,15 @@ public class CartTest {
         driver.manage().window().maximize();
         driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
         signInPage = new SignInPage(driver);
-        profilePage = new ProfilePage(driver);
-        wishListPage = new WishListPage(driver);
         productPage = new ProductPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @Test
-    public void loginAccount(){
+    public void loginAccount() throws IOException, ParseException {
         signInPage.login("gooduser@alex.com", "emerep01");
         productPage.addToCart();
+        cartPage.readCart();
     }
 
     @After
